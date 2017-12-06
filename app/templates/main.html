@@ -99,7 +99,7 @@
 
 
         svg1.append("rect")
-                .attr("x", 50)
+                .attr("x", width / 2 - 320)
                 .attr("y", 210)
                 .attr("width", 160)
                 .attr("height", 60)
@@ -111,7 +111,7 @@
                 });
         svg1.append("text")
                 .text("Similar players")
-                .attr("x", 80)
+                .attr("x", width / 2 - 290)
                 .attr("y", 245)
                 .attr("font-size", "16px")
                 .attr("fill", "white")
@@ -121,7 +121,7 @@
                     simPlayer();
                 });
         svg1.append("rect")
-                .attr("x", 300)
+                .attr("x", width / 2 - 80)
                 .attr("y", 210)
                 .attr("width", 160)
                 .attr("height", 60)
@@ -133,7 +133,7 @@
                 });
         svg1.append("text")
                 .text("Similar team")
-                .attr("x", 340)
+                .attr("x", width / 2 - 45)
                 .attr("y", 245)
                 .attr("font-size", "16px")
                 .attr("fill", "white")
@@ -143,7 +143,7 @@
                     simTeam();
                 });
         svg1.append("rect")
-                .attr("x", 550)
+                .attr("x", width / 2 + 170)
                 .attr("y", 210)
                 .attr("width", 160)
                 .attr("height", 60)
@@ -155,7 +155,7 @@
                 });
         svg1.append("text")
                 .text("Team analysis")
-                .attr("x", 580)
+                .attr("x", width / 2 + 200)
                 .attr("y", 245)
                 .attr("font-size", "16px")
                 .attr("fill", "white")
@@ -197,11 +197,5 @@
         window.location.replace("http://127.0.0.1:5000/teamPerform?name=".concat(passName));
     }
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/jquery.min.js') }}"><\/script>')</script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="{{ url_for('static', filename='js/e10-viewport-bug-workaround.js') }}"></script>
-
 </body>
 </html>

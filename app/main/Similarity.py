@@ -32,10 +32,11 @@ def FindTopKSimilar(player_name):
         players = players[:, 1:].astype("float")
     except:
         print ("Unable to fetch data")
-
     pairwise_sim = cosine_similarity(players, None)
-
-    PlayerIndex = np.nonzero(Names == player_name)[0][0]
+    nonZero = np.nonzero(Names == player_name)
+    if nonZero[0].shape[0] == 0:
+        return []
+    PlayerIndex = nonZero[0][0]
     ind = np.argpartition(pairwise_sim[PlayerIndex], -5)[-5:]
     print (pairwise_sim[PlayerIndex][ind])
     print (Names[ind])

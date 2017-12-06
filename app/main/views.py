@@ -1,7 +1,6 @@
 from flask import render_template, request
 #bluprint main
-from . import main, Similarity, teamUtil
-import MySQLdb
+from . import main, Similarity, teamUtil, wikiUtil
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -16,7 +15,12 @@ def getSimPlayer():
         playerName = playerName + " " + splitted[i]
 
     players = Similarity.FindTopKSimilar(playerName)
-    return render_template('simPlayers.html', result = players)
+    if len(players) == 0:
+        return render_template('WrongInput.html')
+    urls = []
+    for player in players:
+        urls.append(wikiUtil.getWikiUrl(player))
+    return render_template('simPlayers.html', result = players, urls = urls)
 
 @main.route('/simTeam', methods=['GET', 'POST'])
 def getSimTeam():
@@ -26,8 +30,13 @@ def getSimTeam():
     for i in range(1, len(splitted) - 1):
         playerName = playerName + " " + splitted[i]
 
-    players = Similarity.getSimilarTeams(playerName)
-    return render_template('simTeam.html', result = players)
+    teams = Similarity.getSimilarTeams(playerName)
+    if len(teams) == 0:
+        return render_template('WrongInput.html')
+    urls = []
+    for team in teams:
+        urls.append(wikiUtil.getWikiUrl(team))
+    return render_template('simTeam.html', result = teams, playerName = playerName)
 
 @main.route('/teamPerform', methods=['GET', 'POST'])
 def getTeamPerform():
@@ -38,4 +47,6 @@ def getTeamPerform():
         teamName = teamName + " " + splitted[i]
 
     players = teamUtil.getTeamPerformance(teamName)
+
+    #check empty
     return render_template('teamPerform.html', result = players)

@@ -1,6 +1,6 @@
 from flask import render_template, request
 #bluprint main
-from . import main, Similarity, teamUtil, wikiUtil
+from . import main, Similarity, teamUtil, wikiUtil, MatchScore
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -30,13 +30,16 @@ def getSimTeam():
     for i in range(1, len(splitted) - 1):
         playerName = playerName + " " + splitted[i]
 
-    teams = Similarity.getSimilarTeams(playerName)
-    if len(teams) == 0:
+    teamsTmp = MatchScore.MatchScore(playerName)
+    if len(teamsTmp) == 0:
         return render_template('WrongInput.html')
+    teams = []
     urls = []
-    for team in teams:
-        urls.append(wikiUtil.getWikiUrl(team))
-    return render_template('simTeam.html', result = teams, playerName = playerName)
+    for team in teamsTmp:
+        teamName = teamUtil.map[team]
+        teams.append(teamName)
+        urls.append(wikiUtil.getWikiUrl(teamName))
+    return render_template('simTeam.html', result = teams, playerName = playerName, urls = urls)
 
 @main.route('/teamPerform', methods=['GET', 'POST'])
 def getTeamPerform():

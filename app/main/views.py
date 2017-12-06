@@ -1,10 +1,12 @@
 from flask import render_template, request
-#bluprint main
-from . import main, Similarity, teamUtil, wikiUtil, MatchScore
+# bluprint main
+from . import main, Similarity, teamUtil, wikiUtil, MatchScore, TeamStanding
+
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('main.html')
+
 
 @main.route('/simPlayer', methods=['GET', 'POST'])
 def getSimPlayer():
@@ -20,7 +22,8 @@ def getSimPlayer():
     urls = []
     for player in players:
         urls.append(wikiUtil.getWikiUrl(player))
-    return render_template('simPlayers.html', result = players, urls = urls)
+    return render_template('simPlayers.html', result=players, urls=urls)
+
 
 @main.route('/simTeam', methods=['GET', 'POST'])
 def getSimTeam():
@@ -39,7 +42,8 @@ def getSimTeam():
         teamName = teamUtil.map[team]
         teams.append(teamName)
         urls.append(wikiUtil.getWikiUrl(teamName))
-    return render_template('simTeam.html', result = teams, playerName = playerName, urls = urls)
+    return render_template('simTeam.html', result=teams, playerName=playerName, urls=urls)
+
 
 @main.route('/teamPerform', methods=['GET', 'POST'])
 def getTeamPerform():
@@ -48,8 +52,18 @@ def getTeamPerform():
     teamName = splitted[0]
     for i in range(1, len(splitted) - 1):
         teamName = teamName + " " + splitted[i]
+    performance = TeamStanding.TeamStanding(teamName)
+    if len(performance) == 0:
+        return render_template('WrongInput.html')
+    season = [performance[1][0], performance[2][0]]
+    comment = []
+    if int(performance[1][3]) > int(performance[0][3]):
+        comment.append("Ascending")
+    else:
+        comment.append("Descending")
+    if int(performance[2][3]) > int(performance[1][3]):
+        comment.append("Ascending")
+    else:
+        comment.append("Descending")
 
-    players = teamUtil.getTeamPerformance(teamName)
-
-    #check empty
-    return render_template('teamPerform.html', result = players)
+    return render_template('teamPerform.html', result=performance, teamName=teamName, season=season, comment=comment)

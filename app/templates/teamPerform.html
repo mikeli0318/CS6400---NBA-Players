@@ -59,28 +59,73 @@
             .attr("font-style", "italic")
 </script>
 <center>
-    <h2>Here are the best teams we found for {{playerName}}: </h2>
-    {% for name in result %}
-        <p>{{ name }}&nbsp&nbsp&nbsp&nbsp&nbsp<a href={{ urls[loop.index0] }}>wiki link</a></p>
+    <h2>Here is the performance for {{ teamName }} in the past 3 years: </h2>
+    <table border="1">
+        <tr>
+            <th>Season</th>
+            <th>League</th>
+            <th>TeamAbbr</th>
+            <th>WINS</th>
+            <th>LOSSES</th>
+            <th>Finish</th>
+            <th>Age</th>
+            <th>Height</th>
+            <th>Weight</th>
+            <th>Games</th>
+            <th>MP</th>
+            <th>FG</th>
+            <th>FGA</th>
+            <th>FGP</th>
+            <th>3P</th>
+            <th>3PA</th>
+            <th>3PP</th>
+            <th>2P</th>
+            <th>2PA</th>
+            <th>2PP</th>
+            <th>FT</th>
+            <th>FTA</th>
+            <th>FTP</th>
+            <th>ORB</th>
+            <th>DRB</th>
+            <th>TRB</th>
+            <th>AST</th>
+            <th>STL</th>
+            <th>BLK</th>
+            <th>TOV</th>
+            <th>PF</th>
+            <th>PTS</th>
+        </tr>
+        {% for performance in result %}
+            <tr>
+                {% for cell in performance %}
+                    <td>
+                        {{ cell }}
+                    </td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    {% for sea in season %}
+        <p>{{ sea }}:&nbsp&nbsp&nbsp&nbsp&nbsp{{ comment[loop.index0] }}</p>
     {% endfor %}
 </center>
 </body>
 <script>
     svg1 = d3.select("body")
-                .append("svg")
-                .attr("width", width)
-                .attr("height", 100);
+            .append("svg")
+            .attr("width", width)
+            .attr("height", 100);
     svg1.append("rect")
-                .attr("x", width / 2 - 80)
-                .attr("y", 10)
-                .attr("width", 160)
-                .attr("height", 60)
-                .attr("rx", 10)
-                .attr("ry", 10)
-                .attr("fill", "#99CCFF")
-                .on("click", function () {
-                    goBack();
-                });
+            .attr("x", width / 2 - 80)
+            .attr("y", 10)
+            .attr("width", 160)
+            .attr("height", 60)
+            .attr("rx", 10)
+            .attr("ry", 10)
+            .attr("fill", "#99CCFF")
+            .on("click", function () {
+                goBack();
+            });
     svg1.append("text")
             .text("Go back")
             .attr("x", width / 2 - 30)

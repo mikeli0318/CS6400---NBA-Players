@@ -97,6 +97,7 @@
                 .attr("fill", "black")
                 .attr("font-family", "Helvetica Neue");
 
+
         svg1.append("rect")
                 .attr("x", 50)
                 .attr("y", 210)
@@ -106,9 +107,8 @@
                 .attr("ry", 10)
                 .attr("fill", "#99CCFF")
                 .on("click", function () {
-                    addnew();
+                    simPlayer();
                 });
-
         svg1.append("text")
                 .text("Similar players")
                 .attr("x", 80)
@@ -118,7 +118,7 @@
                 .attr("font-family", "Helvetica Neue")
                 .attr("font-style", "italic")
                 .on("click", function () {
-                    addnew();
+                    simPlayer();
                 });
         svg1.append("rect")
                 .attr("x", 300)
@@ -129,9 +129,8 @@
                 .attr("ry", 10)
                 .attr("fill", "#99CCFF")
                 .on("click", function () {
-                    showresult();
+                    simTeam();
                 });
-
         svg1.append("text")
                 .text("Similar team")
                 .attr("x", 340)
@@ -141,7 +140,7 @@
                 .attr("font-family", "Helvetica Neue")
                 .attr("font-style", "italic")
                 .on("click", function () {
-                    showresult();
+                    simTeam();
                 });
         svg1.append("rect")
                 .attr("x", 550)
@@ -152,9 +151,8 @@
                 .attr("ry", 10)
                 .attr("fill", "#99CCFF")
                 .on("click", function () {
-                    showresult();
+                    teamPerform();
                 });
-
         svg1.append("text")
                 .text("Team analysis")
                 .attr("x", 580)
@@ -164,9 +162,46 @@
                 .attr("font-family", "Helvetica Neue")
                 .attr("font-style", "italic")
                 .on("click", function () {
-                    showresult();
+                    teamPerform();
                 });
+    function simPlayer() {
+        var name = prompt("Please enter the player's name", "First_name Last_name");
+        var splitted = name.split(" "), i;
+        var passName = "";
+        for (i = 0; i < splitted.length; i++) {
+            passName = passName.concat(splitted[i]);
+            passName = passName.concat("SPLITTER");
+        }
+        window.location.replace("http://127.0.0.1:5000/simPlayer?name=".concat(passName));
+    }
+
+    function simTeam() {
+        var name = prompt("Please enter the player's name", "First_name Last_name");
+        var splitted = name.split(" "), i;
+        var passName = "";
+        for (i = 0; i < splitted.length; i++) {
+            passName = passName.concat(splitted[i]);
+            passName = passName.concat("SPLITTER");
+        }
+        window.location.replace("http://127.0.0.1:5000/simTeam?name=".concat(passName));
+    }
+
+    function teamPerform() {
+        var name = prompt("Please enter the team's name", "TEAM");
+        var splitted = name.split(" "), i;
+        var passName = "";
+        for (i = 0; i < splitted.length; i++) {
+            passName = passName.concat(splitted[i]);
+            passName = passName.concat("SPLITTER");
+        }
+        window.location.replace("http://127.0.0.1:5000/teamPerform?name=".concat(passName));
+    }
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='js/jquery.min.js') }}"><\/script>')</script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="{{ url_for('static', filename='js/e10-viewport-bug-workaround.js') }}"></script>
 
 </body>
 </html>

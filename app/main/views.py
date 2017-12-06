@@ -1,6 +1,7 @@
 from flask import render_template, request
 #bluprint main
-from . import main, playerUtil, teamUtil
+from . import main, Similarity, teamUtil
+import MySQLdb
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
@@ -14,7 +15,7 @@ def getSimPlayer():
     for i in range(1, len(splitted) - 1):
         playerName = playerName + " " + splitted[i]
 
-    players = playerUtil.getSimilarPlayers(playerName)
+    players = Similarity.FindTopKSimilar(playerName)
     return render_template('simPlayers.html', result = players)
 
 @main.route('/simTeam', methods=['GET', 'POST'])
@@ -25,7 +26,7 @@ def getSimTeam():
     for i in range(1, len(splitted) - 1):
         playerName = playerName + " " + splitted[i]
 
-    players = playerUtil.getSimilarTeams(playerName)
+    players = Similarity.getSimilarTeams(playerName)
     return render_template('simTeam.html', result = players)
 
 @main.route('/teamPerform', methods=['GET', 'POST'])

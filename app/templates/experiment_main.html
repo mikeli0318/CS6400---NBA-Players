@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
+    <title>
+        CS 6400 - NBA Players
+    </title>
+    <style>
+.theme{
+    font-family: "Helvetica Neue";
+    fill: #6699CC;
+    font-style: italic;
+    background-position: center;
+}
+    </style>
+</head>
+
+<body>
+</body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+        width = document.body.offsetWidth;
+        if (width < 1000) {
+            width = 1000;
+        }
+        svg0 = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", 400);
+        svg0.append("rect")
+                .attr("x", 50)
+                .attr("y", 50)
+                .attr("width", width - 100)
+                .attr("height", 350)
+                .attr("rx", 30)
+                .attr("ry", 30)
+                .attr("fill", "#6699CC");
+        svg0.append("text")
+                .text("CS 6400 Course project")
+                .attr("x", 100)
+                .attr("y", 150)
+                .attr("font-size", "50px")
+                .attr("fill", "white")
+                .attr("font-family", "Helvetica Neue")
+        svg0.append("text")
+                .text("NBA Players and Teams Analysis")
+                .attr("x", 100)
+                .attr("y", 260)
+                .attr("font-size", "70px")
+                .attr("fill", "white")
+                .attr("font-family", "Helvetica Neue")
+        svg0.append("text")
+                .text(" - By team 8.")
+                .attr("x", width / 2)
+                .attr("y", 380)
+                .attr("font-size", "16px")
+                .attr("fill", "white")
+                .attr("font-family", "Helvetica Neue")
+                .attr("font-style", "italic")
+
+        svg1 = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", 290);
+
+        svg2 = d3.select("body")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", 4);
+
+        svg1.append("text")
+                .text("Currently we support 3 operations:")
+                .attr("x", 50)
+                .attr("y", 30)
+                .attr("font-size", "20px")
+                .attr("fill", "black")
+                .attr("font-family", "Helvetica Neue")
+        svg1.append("text")
+                .text("\"Similar players\" - Check the most similar players for a player")
+                .attr("x", 50)
+                .attr("y", 60)
+                .attr("font-size", "18px")
+                .attr("fill", "black")
+                .attr("font-family", "Helvetica Neue")
+        svg1.append("text")
+                .text("\"Similar team\" - Check the most similar team for a player")
+                .attr("x", 50)
+                .attr("y", 90)
+                .attr("font-size", "18px")
+                .attr("fill", "black")
+                .attr("font-family", "Helvetica Neue");
+        svg1.append("text")
+                .text("\"Team analysis\" - Check the performance of a team")
+                .attr("x", 50)
+                .attr("y", 120)
+                .attr("font-size", "18px")
+                .attr("fill", "black")
+                .attr("font-family", "Helvetica Neue");
+
+        svg1.append("rect")
+                .attr("x", 50)
+                .attr("y", 210)
+                .attr("width", 160)
+                .attr("height", 60)
+                .attr("rx", 10)
+                .attr("ry", 10)
+                .attr("fill", "#99CCFF")
+                .on("click", function () {
+                    addnew();
+                });
+
+        svg1.append("text")
+                .text("Similar players")
+                .attr("x", 80)
+                .attr("y", 245)
+                .attr("font-size", "16px")
+                .attr("fill", "white")
+                .attr("font-family", "Helvetica Neue")
+                .attr("font-style", "italic")
+                .on("click", function () {
+                    addnew();
+                });
+        svg1.append("rect")
+                .attr("x", 300)
+                .attr("y", 210)
+                .attr("width", 160)
+                .attr("height", 60)
+                .attr("rx", 10)
+                .attr("ry", 10)
+                .attr("fill", "#99CCFF")
+                .on("click", function () {
+                    showresult();
+                });
+
+        svg1.append("text")
+                .text("Similar team")
+                .attr("x", 340)
+                .attr("y", 245)
+                .attr("font-size", "16px")
+                .attr("fill", "white")
+                .attr("font-family", "Helvetica Neue")
+                .attr("font-style", "italic")
+                .on("click", function () {
+                    showresult();
+                });
+        svg1.append("rect")
+                .attr("x", 550)
+                .attr("y", 210)
+                .attr("width", 160)
+                .attr("height", 60)
+                .attr("rx", 10)
+                .attr("ry", 10)
+                .attr("fill", "#99CCFF")
+                .on("click", function () {
+                    showresult();
+                });
+
+        svg1.append("text")
+                .text("Team analysis")
+                .attr("x", 580)
+                .attr("y", 245)
+                .attr("font-size", "16px")
+                .attr("fill", "white")
+                .attr("font-family", "Helvetica Neue")
+                .attr("font-style", "italic")
+                .on("click", function () {
+                    showresult();
+                });
+</script>
+
+</body>
+</html>

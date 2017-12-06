@@ -31,7 +31,7 @@ def FindTopKSimilar(player_name):
     db.close()
 
 def main():
-    FindTopKSimilar("Derrick Rose")
+    FindTopKSimilar("sassaa")
 
 if __name__ == "__main__":
     main()
